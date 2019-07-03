@@ -1,0 +1,32 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* print style */
+#print {
+    position: relative;
+}
+#print .print-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: aliceblue;
+    background-color: #056172;
+}
+#print h3{
+    background-color: #056172;
+    color: aliceblue;
+}
+.ui-widget-header {
+    background-color: #056172;
+}
+
+/* layer-control style */
+section.layer-control {
+    position: fixed;
+    right: 200px;
+    height: 100%;
+}

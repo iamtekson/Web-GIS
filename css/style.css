@@ -1,0 +1,97 @@
+html, body {
+    margin: 0px;
+    padding: 0%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+.ui-dialog { z-index: 1100 !important ;}
+
+#map{
+    width: 100%;
+    height: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 0%;
+}
+
+.zoom-control{
+    margin: 0px;
+    position: fixed;
+    top: 25%;
+    /*bottom: 50%;*/
+    left: 0;
+    z-index: 1000;
+}
+.zoom-control .fas, .zoom-control .far{
+    display: block;
+    font-size: 2rem;
+    padding: 10px;
+    margin: 1px 0 0 0;
+    cursor: pointer;
+    background-color: #056172;
+    color: #ffffff;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+}
+.navbar .fas{
+    font-size: 1.5rem;
+    padding: 15px;
+    background-color: #056172;
+    cursor: pointer;
+    color: #ffffff;
+}
+ 
+/* toggle-content */
+.toggle-content{
+    display: none;
+    text-transform: uppercase;
+    z-index: 1100;
+    position: fixed;
+    left: 0;
+    top: 55px;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+.toggle-content .title{
+    background-color: #056172;
+    padding: 10px;
+}
+.toggle-content .options{
+    cursor: pointer;
+}
+/* Layer-Control */
+a.leaflet-control-layers-toggle{
+    background-color: #056172;
+}
+
+.leaflet-control-layers{
+    background-color: #056172;
+    color: #ffffff;
+}
+
+/* Footer */
+footer{
+    background-color: #ffffff;
+}
+.footer{
+    font-size: 0.8rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.footer .latlong{
+    display: inline;
+}
+
+/* Browser-print style */
+div.leaflet-control-browser-print {display: none;}
