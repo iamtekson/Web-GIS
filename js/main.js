@@ -1,5 +1,6 @@
 var map = L.map('map', {
-    zoomControl: false
+    zoomControl: false,
+    // measureControl: true,
 }).setView([28.2521, 83.9774], 18);
 var scale = L.control.scale().addTo(map);
 
@@ -178,17 +179,51 @@ map.on('click', function() {
     $('.addVectorLayer').hide();
 });
 
-$('#input_files').change(function() {
-    $('.vector').submit();
-  });
+// $('#input_files').change(function() {
+//     $('.vector').submit();
+//   });
 
-  var geojson = new FileReader();
-    geojson.onlode = function() {
-    geojson.readAsDataURL(document.getElementById('input_files').files[0]);
+  var fileInput = document.getElementById('input_files');
+
+  function geojsonData() {
+    fileInput.addEventListener('change', function(event) {
+        var file = fileInput.files[0],
+        fr = new FileReader();
+        fileInput.value = ''; // Clear the input.
+        fr.onload = function() {
+        console.log(fr.result);
+        var layer = omnivore.geojson(fr.result).addTo(map); // Executed synchronously, so no need to use the .on('ready') listener.
+        map.fitBounds(layer.getBounds());
     };
-    omnivore.geojson(geojson.result).addTo(map);
+    fr.readAsDataURL(file);
+  });
+  };
 
- 
+  function csvData() {
+    fileInput.addEventListener('change', function(event) {
+        var file = fileInput.files[0],
+        fr = new FileReader();
+        fileInput.value = ''; // Clear the input.
+        fr.onload = function() {
+        console.log(fr.result);
+        var layer = omnivore.csv.parse(fr.result).addTo(map); // Executed synchronously, so no need to use the .on('ready') listener.
+        map.fitBounds(layer.getBounds());
+    };
+    fr.readAsText(file);
+  });
+  };
+
+//   $(fileInput).change(function(e){
+//     var fileName = e.target.files[0].name;
+//     console.log(fileName);
+//     if(fileName.endsWith("csv")) {
+//         csvData();
+//     } else {
+//         geojsonData();
+//     }
+// });
+geojsonData();
+
 // omnivore.csv('a.csv').addTo(map);
 // omnivore.gpx('a.gpx').addTo(map);
 // omnivore.kml('a.kml').addTo(map);
@@ -199,6 +234,33 @@ $('#input_files').change(function() {
 
 
 
+
+//Leaflet measure
+$(".measure-btn").click(function() {
+    $(".leaflet-control-measure").toggle();
+    $('.leaflet-control-measure-interaction').show();
+    $('.leaflet-control-measure-toggle').hide();
+});
+
+$('.js-cancel').click(function(){
+    $(".leaflet-control-measure").hide();
+});
+
+$('.js-finish').click(function () {
+    $(".leaflet-control-measure").hide();
+  });
+
+  var measureControlOption = {
+    primaryLengthUnit: 'meters', 
+    secondaryLengthUnit: 'kilometers',
+    primaryAreaUnit: 'sqmeters', 
+    secondaryAreaUnit: undefined,
+    activeColor: '#ed3833',
+    completedColor: '#63aabc',
+  }
+
+  var measureControl = L.control.measure(measureControlOption);
+    measureControl.addTo(map);
 
 
 

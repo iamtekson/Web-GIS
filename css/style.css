@@ -136,3 +136,16 @@ div.leaflet-control-browser-print {
     transform: translate(-50%, -50%);
     cursor: pointer;
 }
+
+/* Leaflet measure */
+.leaflet-control-measure {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background-color: #056172;
+    color: #ffffff;
+}
+.leaflet-control-measure a{
+    color: aliceblue;
+}
