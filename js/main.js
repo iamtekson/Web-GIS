@@ -258,9 +258,14 @@ $('.js-finish').click(function () {
     activeColor: '#ed3833',
     completedColor: '#63aabc',
   }
-
   var measureControl = L.control.measure(measureControlOption);
     measureControl.addTo(map);
+
+
+// Info tool
+$('.fa-info-circle').click(function(){
+        $('*').toggleClass('help');
+});
 
 
 

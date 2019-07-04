@@ -54,6 +54,9 @@ html, body {
     cursor: pointer;
     color: #ffffff;
 }
+.help{
+    cursor: help;
+}
  
 /* toggle-content */
 .toggle-content{
