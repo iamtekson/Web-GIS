@@ -58,22 +58,22 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+    maxZoom: 19,
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 });
 
 var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	subdomains: 'abcd',
-	minZoom: 1,
-	maxZoom: 19,
-	ext: 'jpg'
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    subdomains: 'abcd',
+    minZoom: 1,
+    maxZoom: 19,
+    ext: 'jpg'
 });
 
 var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
 });
 
 var mapBox = L.tileLayer('https://api.tiles.mapbox.com/styles/v1/{username}/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -84,7 +84,7 @@ var mapBox = L.tileLayer('https://api.tiles.mapbox.com/styles/v1/{username}/{id}
 });
 
 var baseLayer = {
-    'Open Street Map' : osm,
+    'Open Street Map': osm,
     'Open Topo Map': OpenTopoMap,
     'Stamen Water color': Stamen_Watercolor,
     'Dark matter': CartoDB_DarkMatter,
@@ -135,7 +135,7 @@ L.geoJSON(street, {
 light.addTo(map);
 var streetLight = new L.layerGroup().addLayer(light);
 var overlays = {
-    'Street Lights' : streetLight,
+    'Street Lights': streetLight,
 }
 
 //Layer control
@@ -157,9 +157,48 @@ L.control.browserPrint({
     closePopupsOnPrint: true, //default value
 }).addTo(map);
 
-$('.print').click(function(){
+$('.print').click(function () {
     var modeToUse = L.control.browserPrint.mode.landscape();
     map.printControl.print(modeToUse);
 });
+
+
+
+
+
+
+
+
+//Add vector layer functionality
+$('.addVectorLayer_btn').click(function(){
+    $('.addVectorLayer').toggle();
+});
+
+map.on('click', function() {
+    $('.addVectorLayer').hide();
+});
+
+$('#input_files').change(function() {
+    $('.vector').submit();
+  });
+
+  var geojson = new FileReader();
+    geojson.onlode = function() {
+    geojson.readAsDataURL(document.getElementById('input_files').files[0]);
+    };
+    omnivore.geojson(geojson.result).addTo(map);
+
+ 
+// omnivore.csv('a.csv').addTo(map);
+// omnivore.gpx('a.gpx').addTo(map);
+// omnivore.kml('a.kml').addTo(map);
+// omnivore.wkt('a.wkt').addTo(map);
+// omnivore.topojson('a.topojson').addTo(map);
+// omnivore.geojson('data/try.geojson').addTo(map);
+// omnivore.polyline('a.txt').addTo(map);
+
+
+
+
 
 

@@ -43,7 +43,7 @@
         <h5 class="title text-center text-light">Options</h5>
         <ul class="list-group options">
             <li class="list-group-item print">Print</li>
-            <li class="list-group-item">Add vector files</li>
+            <li class="list-group-item addVectorLayer_btn">Add vector files</li>
             <li class="list-group-item">Catalog</li>
             <li class="list-group-item">Measure</li>
             <li class="list-group-item">Annotation</li>
@@ -71,10 +71,20 @@
         </div>
     </div>
 
+    <!-- Add Vector Layer -->
+    <section class="addVectorLayer">
+        <form action="" method="POST" class="vector">
+            Click to add your vector layer. It support Json, Geojson, csv, gpx and kml formats.
+            <input type="file" name="files" id="input_files">
+        </form>
+    </section>
+
     <!-- footer -->
     <footer class="footer col-12">
-        coordinate:
-        <span class="latlng"></span>
+        <div class="coordinate container">
+            coordinate:
+            <span class="latlng"></span>
+        </div>
     </footer>
 
 
@@ -100,6 +110,9 @@
 
     <!-- leaflet browser print js -->
     <script src="dist/leaflet.browser.print.min.js"></script>
+
+    <!-- Leaflet-Omnivore -->
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
     <script src="js/main.js"></script>
 
 </body>
