@@ -114,23 +114,40 @@ var s_light_style = {
     fillOpacity: 0.8
 };
 
-var light = L.markerClusterGroup();
-L.geoJSON(street, {
+var light1 = L.geoJSON(street, {
     onEachFeature: function (feature, layer) {
-        var popupContent = '<h4 class = "text-primary">Street Light</h4>' +
-            '<div class="container"><table class="table table-striped">' +
-            '<thead><tr><th>Properties</th><th>Value</th></tr></thead>' +
-            '<tbody><tr><td> Name </td><td>' + feature.properties.Name + '</td></tr>' +
-            '<tr><td>Elevation </td><td>' + feature.properties.ele + '</td></tr>' +
-            '<tr><td> Power (watt) </td><td>' + feature.properties.Power_Watt + '</td></tr>' +
-            '<tr><td> Pole Height </td><td>' + feature.properties.pole_hgt + '</td></tr>' +
-            '<tr><td> Time </td><td>' + feature.properties.time + '</td></tr>';
-        layer.bindPopup(popupContent)
+        // var popupContent = '<h4 class = "text-primary">Street Light</h4>' +
+        //     '<div class="container"><table class="table table-striped">' +
+        //     '<thead><tr><th>Properties</th><th>Value</th></tr></thead>' +
+        //     '<tbody><tr><td> Name </td><td>' + feature.properties.Name + '</td></tr>' +
+        //     '<tr><td>Elevation </td><td>' + feature.properties.ele + '</td></tr>' +
+        //     '<tr><td> Power (watt) </td><td>' + feature.properties.Power_Watt + '</td></tr>' +
+        //     '<tr><td> Pole Height </td><td>' + feature.properties.pole_hgt + '</td></tr>' +
+        //     '<tr><td> Time </td><td>' + feature.properties.time + '</td></tr>';
+        // layer.bindPopup(popupContent),
+        layer.on({
+            click: function(e) {
+                $('.addsidebar-popup').slideDown();
+                $('.lat').html('<b>Latitude : </b>'+ e.latlng.lat);
+                $('.long').html('<b>longitude : </b>' + e.latlng.lng);
+                $('.sidebar-info').html('<h4 class = "text-primary">Street Light</h4>' +
+                '<div class="container"><table class="table table-striped">' +
+                '<thead><tr><th>Properties</th><th>Value</th></tr></thead>' +
+                '<tbody><tr><td> Name </td><td>' + feature.properties.Name + '</td></tr>' +
+                '<tr><td>Elevation </td><td>' + feature.properties.ele + '</td></tr>' +
+                '<tr><td> Power (watt) </td><td>' + feature.properties.Power_Watt + '</td></tr>' +
+                '<tr><td> Pole Height </td><td>' + feature.properties.pole_hgt + '</td></tr>' +
+                '<tr><td> Time </td><td>' + feature.properties.time + '</td></tr>');
+            }
+        }); 
     },
     pointToLayer: function (feature, latlng) {
-        return light.addLayer(L.circleMarker(latlng, s_light_style))
+        return L.circleMarker(latlng, s_light_style);
     }
-})
+});
+
+var light = L.markerClusterGroup().addLayer(light1);
+
 
 // map.addLayer(light);
 light.addTo(map);
@@ -267,5 +284,20 @@ $('.fa-info-circle').click(function(){
         $('*').toggleClass('help');
 });
 
+
+
+
+
+
+
+
+
+
+
+
+// sidebar-popup
+$('.sidebar-close').click(function(){
+    $('.addsidebar-popup').hide();
+});
 
 
